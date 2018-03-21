@@ -88,4 +88,73 @@ describe("Credentials", function() {
             });
         });
     });
+
+    describe("getValue", function() {
+        it("gets a value", function() {
+            const creds = new Credentials({ type: "text", misc: 123 });
+            expect(creds.getValue("type")).to.equal("text");
+            expect(creds.getValue("misc")).to.equal(123);
+        });
+
+        it("returns undefined if value doesn't exist", function() {
+            const creds = new Credentials();
+            expect(creds.getValue("misc")).to.be.undefined;
+            expect(creds.getValue("username")).to.be.undefined;
+        });
+
+        it("returns empty string if type isn't provided", function() {
+            const creds = new Credentials();
+            expect(creds.getValue("type")).to.equal("");
+        });
+    });
+
+    describe("getValueOrFail", function() {
+        it("returns values that exist", function() {
+            const creds = new Credentials({ type: "text", misc: 123 });
+            expect(creds.getValueOrFail("type")).to.equal("text");
+            expect(creds.getValueOrFail("misc")).to.equal(123);
+        });
+
+        it("throws for values that do not exist", function() {
+            const creds = new Credentials();
+            expect(() => {
+                creds.getValueOrFail("nothere");
+            }).to.throw(/Failed.+required.+property/i);
+        });
+    });
+
+    describe("setValue", function() {
+        it("sets values", function() {
+            const creds = new Credentials();
+            creds.setValue("username", "alice");
+            expect(creds.username).to.equal("alice");
+        });
+
+        it("returns instance", function() {
+            const creds = new Credentials();
+            const out = creds.setValue("username", "alice");
+            expect(out).to.equal(creds);
+        });
+    });
+
+    describe("toInsecureString", function() {
+        it("outputs a JSON string", function() {
+            const creds = new Credentials({ type: "text" });
+            const str = creds.toInsecureString();
+            expect(JSON.parse(str)).to.deep.equal({
+                type: "text"
+            });
+        });
+    });
+
+    describe("toSecureString", function() {
+        it("outputs an encrypted string", function() {
+            const creds = new Credentials({ type: "text", username: "bob", password: "mypass123" });
+            return creds.toSecureString("testing").then(str => {
+                expect(str).to.not.include("text");
+                expect(str).to.not.include("bob");
+                expect(str).to.not.include("mypass123");
+            });
+        });
+    });
 });
