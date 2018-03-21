@@ -59,5 +59,11 @@ describe("Credentials", function() {
                 });
             });
         });
+
+        describe("isCredentials", function() {
+            it("returns correctly for credentials instances", function() {
+                expect(new Credentials()).to.satisfy(Credentials.isCredentials);
+            });
+        });
     });
 });

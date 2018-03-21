@@ -72,11 +72,20 @@ class Credentials {
             .then(
                 credentialsData =>
                     Array.isArray(credentialsData)
-                        ? new Credentials({ ...credentialsData[1], type: credentialsData[0] })
+                        ? new Credentials(
+                              Object.assign({}, credentialsData[1], { type: credentials[0] })
+                          )
                         : new Credentials(credentialsData)
             );
     }
 
+    /**
+     * Check if an item is a Credentials instance
+     * @param {Object} target The target to check
+     * @returns {Boolean} True if a credentials instance
+     * @memberof Credentials
+     * @static
+     */
     static isCredentials(target) {
         return (
             typeof target === "object" &&
