@@ -1,0 +1,28 @@
+{
+  "name": "@buttercup/credentials",
+  "version": "0.0.0",
+  "description": "Encrypted credentials handler for Buttercup",
+  "main": "source/index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/buttercup/credentials.git"
+  },
+  "keywords": [
+    "buttercup",
+    "credentials",
+    "encryption"
+  ],
+  "author": "Perry Mitchell <perry@perrymitchell.net>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/buttercup/credentials/issues"
+  },
+  "homepage": "https://github.com/buttercup/credentials#readme",
+  "dependencies": {
+    "@buttercup/signing": "^0.1.0",
+    "iocane": "^0.10.1"
+  }
+}
