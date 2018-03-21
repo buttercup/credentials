@@ -108,10 +108,12 @@ class Credentials {
         this.data =
             typeof typeOrData === "string"
                 ? { type: typeOrData }
-                : {
-                      type: "",
-                      ...typeOrData
-                  };
+                : Object.assign(
+                      {
+                          type: ""
+                      },
+                      typeOrData
+                  );
     }
 
     /**
