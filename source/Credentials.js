@@ -56,15 +56,37 @@ function unsignEncryptedContent(content) {
  * Credentials instance
  */
 class Credentials {
+    /**
+     * Create a new instance from an insecure string
+     * @param {String} content The insecure string representation
+     * @memberof Credentials
+     * @returns {Credentials} A new instance
+     * @static
+     */
     static fromInsecureString(content) {
         const data = JSON.parse(content);
         return new Credentials(data);
     }
 
+    /**
+     * Create a new instance from a password
+     * @param {String} password The password
+     * @returns {Credentials} A new instance
+     * @memberof Credentials
+     * @static
+     */
     static fromPassword(password) {
         return new Credentials({ type: "password", password });
     }
 
+    /**
+     * Create a new instance from a secure string
+     * @param {String} content Encrypted content
+     * @param {String} password The password for decryption
+     * @returns {Promise.<Credentials>} A promise that resolves with the new instance
+     * @static
+     * @memberof Credentials
+     */
     static fromSecureString(content, password) {
         return iocane
             .decryptWithPassword(unsignEncryptedContent(content), password)
@@ -94,6 +116,13 @@ class Credentials {
         );
     }
 
+    /**
+     * Check if a string is a secure string
+     * @param {String} str The string to check
+     * @returns {Boolean} True if the string is a secure string
+     * @static
+     * @memberof Credentials
+     */
     static isSecureString(str) {
         try {
             unsignEncryptedContent(str);
@@ -103,6 +132,11 @@ class Credentials {
         }
     }
 
+    /**
+     * Constructor for the Credentials class
+     * @param {String|Object} typeOrData The type (string), or an object representing
+     *  the Credentials data
+     */
     constructor(typeOrData) {
         this[CREDENTIALS_ATTR] = "credentials";
         this.data =
@@ -144,12 +178,6 @@ class Credentials {
         return this.data.username;
     }
 
-    /**
-     * The password
-     * @type {String|undefined}
-     * @memberof Credentials
-     * @instance
-     */
     set password(newPassword) {
         this.data.password = newPassword;
     }
