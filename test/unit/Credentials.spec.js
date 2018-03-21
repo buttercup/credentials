@@ -64,6 +64,28 @@ describe("Credentials", function() {
             it("returns correctly for credentials instances", function() {
                 expect(new Credentials()).to.satisfy(Credentials.isCredentials);
             });
+
+            it("returns correctly for other items", function() {
+                expect({}).to.not.satisfy(Credentials.isCredentials);
+            });
+        });
+
+        describe("isSecureString", function() {
+            beforeEach(function() {
+                const creds = new Credentials({ type: "test" });
+                return creds.toSecureString("testing").then(encStr => {
+                    this.string = encStr;
+                });
+            });
+
+            it("returns correctly for secure strings", function() {
+                expect(this.string).to.satisfy(Credentials.isSecureString);
+            });
+
+            it("returns correctly for other strings", function() {
+                expect("").to.not.satisfy(Credentials.isSecureString);
+                expect("testing").to.not.satisfy(Credentials.isSecureString);
+            });
         });
     });
 });
