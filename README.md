@@ -1,7 +1,7 @@
 # Buttercup Credentials
 > Encrypted credentials handler for Buttercup
 
-[![Build Status](https://travis-ci.org/buttercup/credentials.svg?branch=master)](https://travis-ci.org/buttercup/credentials)
+[![Build Status](https://travis-ci.org/buttercup/credentials.svg?branch=master)](https://travis-ci.org/buttercup/credentials) [![npm version](https://badge.fury.io/js/%40buttercup%2Fcredentials.svg)](https://www.npmjs.com/package/@buttercup/credentials)
 
 ## About
 This library provides the `Credentials` implementation used throughout the Buttercup suite. Credentials is a toolkit to handle account/login data in a secure manner by providing easy encryption/decryption of user details.
