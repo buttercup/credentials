@@ -47,7 +47,9 @@ function unsignEncryptedContent(content) {
     if (newIndex === -1 && oldIndex === -1) {
         throw new Error("Invalid credentials content (unknown signature)");
     }
-    return newIndex >= 0 ? content.substr(SIGNING_KEY.length) : content.substr(SIGNING_KEY_OLD.length);
+    return newIndex >= 0
+        ? content.substr(SIGNING_KEY.length)
+        : content.substr(SIGNING_KEY_OLD.length);
 }
 
 /**
@@ -76,7 +78,11 @@ class Credentials {
     }
 
     static isCredentials(target) {
-        return typeof target === "object" && target !== null && target[CREDENTIALS_ATTR] === "credentials";
+        return (
+            typeof target === "object" &&
+            target !== null &&
+            target[CREDENTIALS_ATTR] === "credentials"
+        );
     }
 
     static isSecureString(str) {
@@ -200,7 +206,9 @@ class Credentials {
         if (typeof masterPassword !== "string") {
             return Promise.reject(new Error("Master password must be a string"));
         }
-        return iocane.encryptWithPassword(this.toInsecureString(), masterPassword).then(signEncryptedContent);
+        return iocane
+            .encryptWithPassword(this.toInsecureString(), masterPassword)
+            .then(signEncryptedContent);
     }
 }
 
