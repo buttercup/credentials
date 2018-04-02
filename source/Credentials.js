@@ -1,4 +1,4 @@
-const iocane = require("iocane").crypto;
+const { createSession } = require("iocane");
 const { getSignature } = require("@buttercup/signing");
 
 /**
@@ -88,8 +88,8 @@ class Credentials {
      * @memberof Credentials
      */
     static fromSecureString(content, password) {
-        return iocane
-            .decryptWithPassword(unsignEncryptedContent(content), password)
+        return createSession()
+            .decrypt(unsignEncryptedContent(content), password)
             .then(decryptedContent => JSON.parse(decryptedContent))
             .then(
                 credentialsData =>
@@ -245,8 +245,8 @@ class Credentials {
         if (typeof masterPassword !== "string") {
             return Promise.reject(new Error("Master password must be a string"));
         }
-        return iocane
-            .encryptWithPassword(this.toInsecureString(), masterPassword)
+        return createSession()
+            .encrypt(this.toInsecureString(), masterPassword)
             .then(signEncryptedContent);
     }
 }
