@@ -95,7 +95,7 @@ class Credentials {
                 credentialsData =>
                     Array.isArray(credentialsData)
                         ? new Credentials(
-                              Object.assign({}, credentialsData[1], { type: credentials[0] })
+                              Object.assign({}, credentialsData[1], { type: credentialsData[0] })
                           )
                         : new Credentials(credentialsData)
             );
