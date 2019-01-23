@@ -1,5 +1,6 @@
 const { createSession } = require("iocane");
 const { getSignature } = require("@buttercup/signing");
+const hash = require("hash.js");
 
 /**
  * The credentials type key
@@ -91,13 +92,12 @@ class Credentials {
         return createSession()
             .decrypt(unsignEncryptedContent(content), password)
             .then(decryptedContent => JSON.parse(decryptedContent))
-            .then(
-                credentialsData =>
-                    Array.isArray(credentialsData)
-                        ? new Credentials(
-                              Object.assign({}, credentialsData[1], { type: credentialsData[0] })
-                          )
-                        : new Credentials(credentialsData)
+            .then(credentialsData =>
+                Array.isArray(credentialsData)
+                    ? new Credentials(
+                          Object.assign({}, credentialsData[1], { type: credentialsData[0] })
+                      )
+                    : new Credentials(credentialsData)
             );
     }
 
@@ -248,6 +248,18 @@ class Credentials {
         return createSession()
             .encrypt(this.toInsecureString(), masterPassword)
             .then(signEncryptedContent);
+    }
+
+    /**
+     * Get A unique ID of the datasource based on its data
+     * @returns {String} A hash of the data
+     * @memberof Credentials
+     */
+    getID() {
+        return hash
+            .sha256()
+            .update(JSON.stringify(this.data))
+            .digest("hex");
     }
 }
 
