@@ -89,6 +89,36 @@ describe("Credentials", function() {
         });
     });
 
+    describe("getID", function() {
+        it("should return a hash of this.data", function() {
+            const creds = new Credentials({
+                type: "text",
+                username: "bob",
+                password: "mypass123",
+                fake_value: "somevalue"
+            });
+            expect(creds.getID()).to.equal(
+                "23889bee8b6f8a8923d0cc5e3daeffec54d79b5b50b251c307520a56ab875f58"
+            );
+        });
+
+        it("should return unique hashes", function() {
+            const creds1 = Credentials.fromPassword("test1");
+            const creds2 = Credentials.fromPassword("test2");
+            expect(creds1.getID()).to.not.equal(creds2.getID());
+        });
+
+        it("should return the same value for multiple calls", function() {
+            const creds1 = Credentials.fromPassword("test1");
+            expect(creds1.getID()).to.equal(
+                "f90d99fd357cbfd6f33dff57c2445aa0c2714507825c7874625616f23a296157"
+            );
+            expect(creds1.getID()).to.equal(
+                "f90d99fd357cbfd6f33dff57c2445aa0c2714507825c7874625616f23a296157"
+            );
+        });
+    });
+
     describe("getValue", function() {
         it("gets a value", function() {
             const creds = new Credentials({ type: "text", misc: 123 });
@@ -155,20 +185,6 @@ describe("Credentials", function() {
                 expect(str).to.not.include("bob");
                 expect(str).to.not.include("mypass123");
             });
-        });
-    });
-
-    describe("getID", function() {
-        it("should return a unique hash of this.data", function() {
-            const creds = new Credentials({
-                type: "text",
-                username: "bob",
-                password: "mypass123",
-                fake_value: "somevalue"
-            });
-            expect(creds.getID()).to.equal(
-                "23889bee8b6f8a8923d0cc5e3daeffec54d79b5b50b251c307520a56ab875f58"
-            );
         });
     });
 });
