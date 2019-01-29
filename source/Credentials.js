@@ -187,6 +187,18 @@ class Credentials {
     }
 
     /**
+     * Get A unique ID of the datasource based on its data
+     * @returns {String} A hash of the data
+     * @memberof Credentials
+     */
+    getID() {
+        return hash
+            .sha256()
+            .update(JSON.stringify(this.data))
+            .digest("hex");
+    }
+
+    /**
      * Get a value from the credentials
      * @param {String} property The property to fetch
      * @returns {*|undefined} Returns the value if found, or undefined
@@ -248,18 +260,6 @@ class Credentials {
         return createSession()
             .encrypt(this.toInsecureString(), masterPassword)
             .then(signEncryptedContent);
-    }
-
-    /**
-     * Get A unique ID of the datasource based on its data
-     * @returns {String} A hash of the data
-     * @memberof Credentials
-     */
-    getID() {
-        return hash
-            .sha256()
-            .update(JSON.stringify(this.data))
-            .digest("hex");
     }
 }
 
