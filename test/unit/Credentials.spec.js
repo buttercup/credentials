@@ -179,10 +179,14 @@ describe("Credentials", function() {
 
     describe("toSecureString", function() {
         it("outputs an encrypted string", function() {
-            const creds = new Credentials({ type: "text", username: "bob", password: "mypass123" });
+            const creds = new Credentials({
+                type: "text",
+                username: "johanna",
+                password: "mypass123"
+            });
             return creds.toSecureString("testing").then(str => {
                 expect(str).to.not.include("text");
-                expect(str).to.not.include("bob");
+                expect(str).to.not.include("johanna");
                 expect(str).to.not.include("mypass123");
             });
         });
