@@ -1,5 +1,10 @@
 # Credentials changelog
 
+## v1.2.0
+_2019-01-29_
+
+ * Add `Credentials#getID` method
+
 ## v1.1.1
 _2018-06-19_
 

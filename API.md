@@ -11,6 +11,7 @@ Credentials instance
         * [.password](#Credentials+password) : <code>String</code> \| <code>undefined</code>
         * [.type](#Credentials+type) : <code>String</code>
         * [.username](#Credentials+username) : <code>String</code> \| <code>undefined</code>
+        * [.getID()](#Credentials+getID) ⇒ <code>String</code>
         * [.getValue(property)](#Credentials+getValue) ⇒ <code>\*</code> \| <code>undefined</code>
         * [.getValueOrFail(property)](#Credentials+getValueOrFail) ⇒ <code>\*</code>
         * [.setValue(property, value)](#Credentials+setValue) ⇒ [<code>Credentials</code>](#Credentials)
@@ -52,6 +53,13 @@ The credentials type
 The username
 
 **Kind**: instance property of [<code>Credentials</code>](#Credentials)  
+<a name="Credentials+getID"></a>
+
+### credentials.getID() ⇒ <code>String</code>
+Get A unique ID of the datasource based on its data
+
+**Kind**: instance method of [<code>Credentials</code>](#Credentials)  
+**Returns**: <code>String</code> - A hash of the data  
 <a name="Credentials+getValue"></a>
 
 ### credentials.getValue(property) ⇒ <code>\*</code> \| <code>undefined</code>
