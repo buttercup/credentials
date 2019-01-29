@@ -157,4 +157,18 @@ describe("Credentials", function() {
             });
         });
     });
+
+    describe("getID", function() {
+        it("should return a unique hash of this.data", function() {
+            const creds = new Credentials({
+                type: "text",
+                username: "bob",
+                password: "mypass123",
+                fake_value: "somevalue"
+            });
+            expect(creds.getID()).to.equal(
+                "23889bee8b6f8a8923d0cc5e3daeffec54d79b5b50b251c307520a56ab875f58"
+            );
+        });
+    });
 });
