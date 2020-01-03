@@ -39,14 +39,14 @@
   "devDependencies": {
     "@buttercup/app-env": "^0.1.1",
     "chai": "^4.2.0",
-    "husky": "^1.3.1",
-    "jsdoc-to-markdown": "^4.0.1",
-    "lint-staged": "^8.1.1",
-    "mocha": "^5.2.0",
+    "husky": "^3.1.0",
+    "jsdoc-to-markdown": "^5.0.3",
+    "lint-staged": "^9.5.0",
+    "mocha": "^6.2.2",
     "npm-run-all": "^4.1.5",
-    "prettier": "^1.16.1",
+    "prettier": "^1.19.1",
     "prettier-check": "^2.0.0",
-    "sinon": "^7.2.3"
+    "sinon": "^8.0.2"
   },
   "peerDependencies": {
     "@buttercup/app-env": ">= 0.1.1"
