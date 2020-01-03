@@ -1,5 +1,11 @@
 # Credentials changelog
 
+## v2.0.0
+_2020-01-03_
+
+ * **Breaking changes:**
+   * `app-env` used for core crypto functionality
+
 ## v1.2.0
 _2019-01-29_
 
