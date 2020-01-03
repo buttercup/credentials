@@ -1,6 +1,6 @@
-const { createSession } = require("iocane");
 const { getSignature } = require("@buttercup/signing");
 const hash = require("hash.js");
+const { getDecryptFn, getEncryptFn } = require("./appEnv.js");
 
 /**
  * The credentials type key
@@ -89,8 +89,8 @@ class Credentials {
      * @memberof Credentials
      */
     static fromSecureString(content, password) {
-        return createSession()
-            .decrypt(unsignEncryptedContent(content), password)
+        const decrypt = getDecryptFn();
+        return decrypt(unsignEncryptedContent(content), password)
             .then(decryptedContent => JSON.parse(decryptedContent))
             .then(credentialsData =>
                 Array.isArray(credentialsData)
@@ -257,9 +257,8 @@ class Credentials {
         if (typeof masterPassword !== "string") {
             return Promise.reject(new Error("Master password must be a string"));
         }
-        return createSession()
-            .encrypt(this.toInsecureString(), masterPassword)
-            .then(signEncryptedContent);
+        const encrypt = getEncryptFn();
+        return encrypt(this.toInsecureString(), masterPassword).then(signEncryptedContent);
     }
 }
 

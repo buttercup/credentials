@@ -9,6 +9,8 @@ This library provides the `Credentials` implementation used throughout the Butte
 ## Installation
 Simply run `npm install @buttercup/credentials --save` to install.
 
+This library requires [`@buttercup/app-env`](https://github.com/buttercup/app-env) for environment and low-level functionality initialisation. This is usually performed alongside `buttercup` core.
+
 ## Usage
 Credentials can be created in a variety of ways:
 
